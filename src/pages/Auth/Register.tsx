@@ -26,7 +26,8 @@ const Register = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -38,17 +39,33 @@ const Register = () => {
       },
     });
 
-    if (error) {
-      if (error.message.includes('duplicate key value violates unique constraint "profiles_cpf_key"')) {
+    if (signUpError) {
+      if (signUpError.message.includes('duplicate key value violates unique constraint "profiles_cpf_key"')) {
         showError("Este CPF já está cadastrado.");
       } else {
-        showError(error.message || "Não foi possível criar a conta.");
+        showError(signUpError.message || "Não foi possível criar a conta.");
       }
-    } else {
+      setLoading(false);
+      return;
+    }
+
+    if (signUpData.user) {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
-      // Futuramente, aqui podemos adicionar a lógica para enviar o e-mail para o administrador.
+
+      // Invoca a função para notificar o administrador em segundo plano.
+      const { error: functionError } = await supabase.functions.invoke('notify-admin-on-signup', {
+          body: { fullName, cpf, phone, email },
+      });
+
+      if (functionError) {
+          // Não mostramos o erro para o usuário, pois o cadastro dele foi um sucesso.
+          // Apenas registramos no console para fins de depuração.
+          console.error('Erro ao notificar o administrador:', functionError.message);
+      }
+
       navigate("/login");
     }
+    
     setLoading(false);
   };
 
