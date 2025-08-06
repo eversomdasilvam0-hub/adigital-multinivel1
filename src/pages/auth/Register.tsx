@@ -52,16 +52,15 @@ const Register = () => {
     if (signUpData.user) {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
 
-      // Invoca a função para notificar o administrador em segundo plano.
-      const { error: functionError } = await supabase.functions.invoke('notify-admin-on-signup', {
-          body: { fullName, cpf, phone, email },
-      });
+      // A chamada para a função de notificação foi temporariamente desativada
+      // devido a um problema na plataforma de implantação.
+      // const { error: functionError } = await supabase.functions.invoke('notify-admin-on-signup', {
+      //     body: { fullName, cpf, phone, email },
+      // });
 
-      if (functionError) {
-          // Não mostramos o erro para o usuário, pois o cadastro dele foi um sucesso.
-          // Apenas registramos no console para fins de depuração.
-          console.error('Erro ao notificar o administrador:', functionError.message);
-      }
+      // if (functionError) {
+      //     console.error('Erro ao notificar o administrador:', functionError.message);
+      // }
 
       navigate("/login");
     }
