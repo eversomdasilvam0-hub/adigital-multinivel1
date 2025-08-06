@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { MadeWithLasy } from "@/components/made-with-lasy";
 import { Skeleton } from "@/components/ui/skeleton";
+import ProfileCard from "@/components/dashboard/ProfileCard";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -19,8 +20,8 @@ const Index = () => {
       <div className="space-y-4">
         <Skeleton className="h-8 w-1/2" />
         <Skeleton className="h-6 w-3/4" />
-        <div className="flex items-center justify-center pt-20">
-            <Skeleton className="h-40 w-full" />
+        <div className="pt-8">
+            <Skeleton className="h-64 w-full" />
         </div>
       </div>
     );
@@ -36,10 +37,14 @@ const Index = () => {
           Aqui você poderá gerenciar sua rede e acompanhar suas comissões.
         </p>
       </header>
-      <main className="flex flex-col gap-8">
-        {/* Conteúdo do Dashboard virá aqui */}
-        <div className="text-center p-10 border-2 border-dashed rounded-lg">
-            <p>Em breve: gráficos, estatísticas e muito mais!</p>
+      <main className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="lg:col-span-1">
+            <ProfileCard />
+        </div>
+        <div className="md:col-span-1 lg:col-span-2">
+            <div className="text-center p-10 border-2 border-dashed rounded-lg h-full flex items-center justify-center">
+                <p className="text-muted-foreground">Em breve: gerenciamento da sua rede e comissões!</p>
+            </div>
         </div>
       </main>
       <MadeWithLasy />
