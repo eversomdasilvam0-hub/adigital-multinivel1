@@ -1,30 +1,30 @@
-import { corsHeaders } from '../_shared/cors.ts'
+import { serve } from 'https://deno.land/std@0.177.0/http/server.ts'
 
-// ATENÇÃO: A chave da API do Resend será lida das variáveis de ambiente.
-const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-const ADMIN_EMAIL = 'everson@memorialconstrutora.com.br';
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+}
 
-Deno.serve(async (req: Request) => {
-  // Trata a requisição de pre-flight do CORS
+const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
+const ADMIN_EMAIL = 'everson@memorialconstrutora.com.br'
+
+serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return new Response('ok', { headers: corsHeaders })
   }
 
   try {
-    const { fullName, cpf, phone, email } = await req.json();
-
     if (!RESEND_API_KEY) {
-      throw new Error('A chave da API do Resend (RESEND_API_KEY) não está configurada nas variáveis de ambiente da função.');
+      throw new Error('A chave da API do Resend (RESEND_API_KEY) não está configurada nas variáveis de ambiente da função.')
     }
 
-    // Para enviar e-mails a partir do seu próprio domínio (ex: contato@sua-imobiliaria.com),
-    // você precisa verificar seu domínio no painel do Resend.
-    // Por enquanto, usaremos o domínio padrão de testes do Resend.
-    const response = await fetch('https://api.resend.com/emails', {
+    const { fullName, cpf, phone, email } = await req.json()
+
+    const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
         from: 'Lasy App <onboarding@resend.dev>',
@@ -43,25 +43,24 @@ Deno.serve(async (req: Request) => {
           </ul>
         `,
       }),
-    });
+    })
 
-    const data = await response.json();
+    const data = await resendResponse.json()
 
-    if (!response.ok) {
-        console.error('Erro na API do Resend:', data);
-        throw new Error(data.message || 'Falha ao enviar o e-mail de notificação.');
+    if (!resendResponse.ok) {
+      console.error('Erro na API do Resend:', data)
+      throw new Error(data.message || 'Falha ao enviar o e-mail de notificação.')
     }
 
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,
-    });
-
+    })
   } catch (error) {
-    console.error(error);
+    console.error(error)
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 500,
-    });
+    })
   }
-});
+})
