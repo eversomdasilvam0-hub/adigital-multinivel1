@@ -1,5 +1,10 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
-import { corsHeaders } from '../_shared/cors.ts'
+import { serve } from 'https://deno.land/std@0.224.0/http/server.ts'
+
+// Cabeçalhos CORS agora estão diretamente neste arquivo para simplificar o deploy.
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
 
 // ATENÇÃO: A chave da API do Resend será lida das variáveis de ambiente.
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
@@ -18,9 +23,6 @@ serve(async (req: Request) => {
       throw new Error('A chave da API do Resend (RESEND_API_KEY) não está configurada nas variáveis de ambiente da função.');
     }
 
-    // Para enviar e-mails a partir do seu próprio domínio (ex: contato@sua-imobiliaria.com),
-    // você precisa verificar seu domínio no painel do Resend.
-    // Por enquanto, usaremos o domínio padrão de testes do Resend.
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
