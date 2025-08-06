@@ -17,6 +17,9 @@ import { showSuccess, showError } from "@/utils/toast";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -26,12 +29,24 @@ const Register = () => {
     const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: fullName,
+          cpf: cpf,
+          phone: phone,
+        },
+      },
     });
 
     if (error) {
-      showError(error.message || "Não foi possível criar a conta.");
+      if (error.message.includes('duplicate key value violates unique constraint "profiles_cpf_key"')) {
+        showError("Este CPF já está cadastrado.");
+      } else {
+        showError(error.message || "Não foi possível criar a conta.");
+      }
     } else {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
+      // Futuramente, aqui podemos adicionar a lógica para enviar o e-mail para o administrador.
       navigate("/login");
     }
     setLoading(false);
@@ -48,6 +63,37 @@ const Register = () => {
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="full-name">Nome Completo</Label>
+              <Input
+                id="full-name"
+                placeholder="Seu nome completo"
+                required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="cpf">CPF</Label>
+              <Input
+                id="cpf"
+                placeholder="000.000.000-00"
+                required
+                value={cpf}
+                onChange={(e) => setCpf(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="phone">Telefone</Label>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="(00) 00000-0000"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
