@@ -54,9 +54,13 @@ const Index = () => {
             <ProfileCard />
             <InviteCard />
         </div>
-        <div className="md:col-span-2 flex flex-col gap-8">
-            <CommissionsChart />
-            <MyNetworkCard />
+        <div className="md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="lg:col-span-2">
+                <CommissionsChart />
+            </div>
+            <div className="lg:col-span-2">
+                <MyNetworkCard />
+            </div>
         </div>
       </main>
       <MadeWithLasy />
