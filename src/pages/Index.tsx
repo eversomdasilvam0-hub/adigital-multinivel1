@@ -12,16 +12,12 @@ const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
-  /*
-  // TEMPORARIAMENTE DESATIVADO PARA DEBUG
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login");
     }
   }, [user, loading, navigate]);
-  */
 
-  // Mostra um loader genérico se o usuário não estiver logado, em vez de quebrar a aplicação.
   if (loading || !user) {
     return (
       <div className="space-y-4">
@@ -51,7 +47,7 @@ const Index = () => {
         </h1>
         <p className="text-muted-foreground">
           Gerencie sua rede e acompanhe seus resultados.
-        </p>
+        p>
       </header>
       <main className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-1 flex flex-col gap-8">
