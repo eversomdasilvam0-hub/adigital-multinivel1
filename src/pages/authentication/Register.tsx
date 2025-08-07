@@ -32,11 +32,8 @@ const Register = () => {
                 password_label: 'Crie uma senha',
                 button_label: 'Cadastrar',
                 social_provider_text: 'Entrar com {{provider}}',
-                link_text: 'Não tem uma conta? Cadastre-se',
+                link_text: 'Já tem uma conta? Entre',
               },
-               sign_in: {
-                link_text: "Já tem uma conta? Entre",
-              }
             },
           }}
         />

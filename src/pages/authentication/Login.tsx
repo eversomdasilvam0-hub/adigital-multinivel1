@@ -32,11 +32,8 @@ const Login = () => {
                 password_label: 'Sua senha',
                 button_label: 'Entrar',
                 social_provider_text: 'Entrar com {{provider}}',
-                link_text: 'Já tem uma conta? Entre',
+                link_text: 'Não tem uma conta? Cadastre-se',
               },
-              sign_up: {
-                link_text: "Não tem uma conta? Cadastre-se",
-              }
             },
           }}
         />
