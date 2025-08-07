@@ -12,17 +12,23 @@ const Index = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
+  /*
+  // TEMPORARIAMENTE DESATIVADO PARA DEBUG
   useEffect(() => {
     if (!loading && !user) {
       navigate("/login");
     }
   }, [user, loading, navigate]);
+  */
 
+  // Mostra um loader genérico se o usuário não estiver logado, em vez de quebrar a aplicação.
   if (loading || !user) {
     return (
       <div className="space-y-4">
-        <Skeleton className="h-8 w-1/2" />
-        <Skeleton className="h-6 w-3/4" />
+        <h1 className="text-3xl font-bold tracking-tight">Carregando Painel...</h1>
+        <p className="text-muted-foreground">
+          Aguarde enquanto verificamos sua sessão.
+        </p>
         <div className="pt-8 grid gap-8 md:grid-cols-3">
             <div className="md:col-span-1 flex flex-col gap-8">
                 <Skeleton className="h-64 w-full" />
