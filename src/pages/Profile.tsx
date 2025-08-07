@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,6 @@ import {
   Mail, 
   Phone, 
   Calendar,
-  MapPin,
   Edit3,
   Save,
   X,
@@ -23,13 +22,7 @@ import {
   Users,
   DollarSign,
   Star,
-  Crown,
-  Target,
-  Zap,
   Copy,
-  ExternalLink,
-  Settings,
-  Bell,
   Lock,
   Eye,
   EyeOff
@@ -317,11 +310,11 @@ const Profile = () => {
                     {profile.role?.charAt(0).toUpperCase() + profile.role?.slice(1)}
                   </Badge>
                   <Badge className={getStatusColor(profile.status)}>
-                    <Zap className="h-3 w-3 mr-1" />
+                    <Star className="h-3 w-3 mr-1" />
                     {profile.status?.charAt(0).toUpperCase() + profile.status?.slice(1)}
                   </Badge>
                   <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                    <Star className="h-3 w-3 mr-1" />
+                    <Award className="h-3 w-3 mr-1" />
                     Rank #{stats.rank}
                   </Badge>
                 </div>

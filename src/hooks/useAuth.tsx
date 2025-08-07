@@ -1,3 +1,2 @@
-// Este arquivo foi movido para src/contexts/AuthContext.tsx
-// O hook useAuth agora é exportado diretamente do contexto
+// Re-exportando useAuth do contexto
 export { useAuth } from '@/contexts/AuthContext';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -110,7 +110,7 @@ const Sales = () => {
     commission.sale?.seller?.full_name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const totalCommissions = commissions.reduce((sum,  comm) => sum + comm.amount, 0);
+  const totalCommissions = commissions.reduce((sum, comm) => sum + comm.amount, 0);
 
   if (loading) {
     return (
