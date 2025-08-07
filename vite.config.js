@@ -1,39 +1,32 @@
-const { defineConfig } = require("vite");
-const react = require("@vitejs/plugin-react-swc");
-const path = require("path");
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import path from "path";
+import { fileURLToPath } from "url";
 
-module.exports = defineConfig({
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-
-  // Configurações de build otimizadas
   build: {
     target: "es2020",
     minify: "esbuild",
     sourcemap: false,
-    rollupOptions: {
-      // Removendo a configuração de manualChunks para simplificar o build
-    },
   },
-
-  // Configurações de servidor de desenvolvimento
   server: {
     port: 5173,
     host: true,
     open: true,
   },
-
-  // Configurações de preview
   preview: {
     port: 4173,
     host: true,
   },
-
-  // Configurações de dependências
   optimizeDeps: {
     include: [
       "react",
