@@ -41,16 +41,16 @@ const CommissionsChart = () => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
             <YAxis
-              tickFormatter={(value) =>
-                `R$${new Intl.NumberFormat("pt-BR").format(value as number)}`
+              tickFormatter={(value: number) =>
+                `R$${new Intl.NumberFormat("pt-BR").format(value)}`
               }
             />
             <Tooltip
-              formatter={(value) => [
+              formatter={(value: number) => [
                 new Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
-                }).format(value as number),
+                }).format(value),
                 "Comissão",
               ]}
             />
