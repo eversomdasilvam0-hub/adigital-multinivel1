@@ -16,14 +16,14 @@ import {
   YAxis,
 } from "recharts";
 
-// Dados de exemplo. Substituiremos por dados reais no futuro.
+// Dados de exemplo zerados.
 const data = [
-  { month: "Jan", commission: 4000 },
-  { month: "Fev", commission: 3000 },
-  { month: "Mar", commission: 5000 },
-  { month: "Abr", commission: 4500 },
-  { month: "Mai", commission: 6000 },
-  { month: "Jun", commission: 8000 },
+  { month: "Jan", commission: 0 },
+  { month: "Fev", commission: 0 },
+  { month: "Mar", commission: 0 },
+  { month: "Abr", commission: 0 },
+  { month: "Mai", commission: 0 },
+  { month: "Jun", commission: 0 },
 ];
 
 const CommissionsChart = () => {
