@@ -21,7 +21,7 @@ const Index = () => {
   if (loading || !user) {
     return (
       <div className="space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">Carregando Painel...</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Carregando Painel...</h1>
         <p className="text-muted-foreground">
           Aguarde enquanto verificamos sua sessão.
         </p>
@@ -42,7 +42,7 @@ const Index = () => {
   return (
     <div className="flex flex-col gap-8">
       <header>
-        <h1 className="text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
           Bem-vindo ao seu Painel
         </h1>
         <p className="text-muted-foreground">
