@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../supabaseClient";
 import {
   Card,
   CardContent,
@@ -59,7 +59,7 @@ const ProfileCard = () => {
             <CardHeader>
                 <CardTitle>Meu Perfil</CardTitle>
                 <CardDescription>Suas informações de corretor.</CardDescription>
-            </CardHeader>
+            </Header>
             <CardContent className="space-y-4">
                 <Skeleton className="h-5 w-3/4" />
                 <Skeleton className="h-5 w-full" />

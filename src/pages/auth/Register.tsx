@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../supabaseClient";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -63,7 +63,6 @@ const Register = () => {
 
     if (signUpData.user) {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
-      
       navigate("/login");
     }
     
@@ -81,6 +80,7 @@ const Register = () => {
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
+            
             <div className="grid gap-2">
               <Label htmlFor="full-name">Nome Completo</Label>
               <Input
