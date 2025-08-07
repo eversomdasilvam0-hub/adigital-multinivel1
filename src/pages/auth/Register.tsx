@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { supabase } from "../../lib/supabase";
+import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -63,6 +63,7 @@ const Register = () => {
 
     if (signUpData.user) {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
+      
       navigate("/login");
     }
     
