@@ -36,7 +36,7 @@ export const supabase = getSupabase();
 export { getSupabase };
 
 // Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/lib/supabase";
 // or
-// import { getSupabase } from "@/integrations/supabase/client";
+// import { getSupabase } from "@/lib/supabase";
 // const supabase = getSupabase();

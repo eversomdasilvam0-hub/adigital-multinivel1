@@ -53,9 +53,4 @@ export default defineConfig({
       "lucide-react",
     ],
   },
-
-  // Configurações de ambiente
-  define: {
-    "process.env": process.env,
-  },
 });
