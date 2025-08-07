@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +21,18 @@ const Register = () => {
   const [cpf, setCpf] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [referrerId, setReferrerId] = useState<string | null>(null);
+  
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const refId = params.get("ref");
+    if (refId) {
+      setReferrerId(refId);
+    }
+  }, [location.search]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +46,7 @@ const Register = () => {
           full_name: fullName,
           cpf: cpf,
           phone: phone,
+          referrer_id: referrerId, // Adicionando o ID do referenciador
         },
       },
     });
@@ -51,17 +63,6 @@ const Register = () => {
 
     if (signUpData.user) {
       showSuccess("Cadastro realizado! Verifique seu e-mail para confirmar a conta.");
-
-      // A chamada para a função de notificação foi temporariamente desativada
-      // devido a um problema na plataforma de implantação.
-      // const { error: functionError } = await supabase.functions.invoke('notify-admin-on-signup', {
-      //     body: { fullName, cpf, phone, email },
-      // });
-
-      // if (functionError) {
-      //     console.error('Erro ao notificar o administrador:', functionError.message);
-      // }
-
       navigate("/login");
     }
     
