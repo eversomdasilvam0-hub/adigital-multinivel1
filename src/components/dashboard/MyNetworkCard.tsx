@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "@/lib/supabase";
 import {
   Card,
   CardContent,
