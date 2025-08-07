@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
-import { SessionContextProvider } from "@supabase/auth-ui-react";
-import { supabase } from "@/lib/supabase";
+import { AuthProvider } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
 import Index from "@/pages/Index";
 import Login from "@/pages/Login";
@@ -20,8 +19,8 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <SessionContextProvider supabaseClient={supabase}>
-        <Router>
+      <Router>
+        <AuthProvider>
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -37,8 +36,8 @@ function App() {
             </Routes>
           </Layout>
           <Toaster />
-        </Router>
-      </SessionContextProvider>
+        </AuthProvider>
+      </Router>
     </QueryClientProvider>
   );
 }

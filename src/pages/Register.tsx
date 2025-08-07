@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,10 +25,11 @@ const Register = () => {
   });
 
   // Redirecionar se já estiver logado
-  if (user) {
-    navigate("/");
-    return null;
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,19 +97,6 @@ const Register = () => {
         return;
       }
 
-      // Enviar dados para o email administrativo
-      await fetch('/api/send-registration-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: formData.fullName,
-          email: formData.email,
-          cpf: formData.cpf,
-          phone: formData.phone,
-          referrerCode: formData.referrerCode
-        })
-      }).catch(console.error); // Não bloquear o cadastro se o email falhar
-
       toast.success("Cadastro realizado com sucesso! Verifique seu email.");
       navigate("/login");
 
@@ -119,6 +107,10 @@ const Register = () => {
       setLoading(false);
     }
   };
+
+  if (user) {
+    return null; // Evita flash antes do redirect
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
