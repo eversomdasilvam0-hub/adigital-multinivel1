@@ -80,6 +80,7 @@ const Register = () => {
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
+            
             <div className="grid gap-2">
               <Label htmlFor="full-name">Nome Completo</Label>
               <Input

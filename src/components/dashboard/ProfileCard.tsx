@@ -59,7 +59,7 @@ const ProfileCard = () => {
             <CardHeader>
                 <CardTitle>Meu Perfil</CardTitle>
                 <CardDescription>Suas informações de corretor.</CardDescription>
-            </Header>
+            </CardHeader>
             <CardContent className="space-y-4">
                 <Skeleton className="h-5 w-3/4" />
                 <Skeleton className="h-5 w-full" />
@@ -75,7 +75,7 @@ const ProfileCard = () => {
         <Card>
             <CardHeader>
                 <CardTitle>Meu Perfil</CardTitle>
-            </Header>
+            </CardHeader>
             <CardContent>
                 <p className="text-destructive">{error}</p>
             </CardContent>
