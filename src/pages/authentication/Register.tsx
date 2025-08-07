@@ -69,6 +69,7 @@ const Register = () => {
           phone: values.phone,
           referrer_id: referrerId,
         },
+        emailRedirectTo: `${window.location.origin}/confirmation`,
       },
     });
 
@@ -78,7 +79,8 @@ const Register = () => {
       showError(error.message);
     } else {
       showSuccess("Cadastro realizado com sucesso! Verifique seu e-mail para confirmar a conta.");
-      navigate("/login");
+      // Não redirecionamos mais aqui, o usuário deve clicar no link do e-mail.
+      // A mensagem de sucesso já instrui o usuário sobre o próximo passo.
     }
   }
 

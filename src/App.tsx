@@ -6,6 +6,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
+import Confirmation from "./pages/authentication/Confirmation";
 import { AuthProvider } from "./contexts/AuthContext";
 import Layout from "./components/Layout";
 
@@ -22,6 +23,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/confirmation" element={<Confirmation />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>
