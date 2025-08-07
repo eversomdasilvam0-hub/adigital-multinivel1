@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import ProfileCard from "@/components/dashboard/ProfileCard";
 import MyNetworkCard from "@/components/dashboard/MyNetworkCard";
 import InviteCard from "@/components/dashboard/InviteCard";
+import CommissionsChart from "@/components/dashboard/CommissionsChart";
 
 const Index = () => {
   const { user, loading } = useAuth();
@@ -22,9 +23,15 @@ const Index = () => {
       <div className="space-y-4">
         <Skeleton className="h-8 w-1/2" />
         <Skeleton className="h-6 w-3/4" />
-        <div className="pt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Skeleton className="h-48 w-full lg:col-span-1" />
-            <Skeleton className="h-96 w-full md:col-span-2 lg:col-span-2" />
+        <div className="pt-8 grid gap-8 md:grid-cols-3">
+            <div className="md:col-span-1 flex flex-col gap-8">
+                <Skeleton className="h-64 w-full" />
+                <Skeleton className="h-48 w-full" />
+            </div>
+            <div className="md:col-span-2 flex flex-col gap-8">
+                <Skeleton className="h-96 w-full" />
+                <Skeleton className="h-80 w-full" />
+            </div>
         </div>
       </div>
     );
@@ -45,7 +52,8 @@ const Index = () => {
             <ProfileCard />
             <InviteCard />
         </div>
-        <div className="md:col-span-2">
+        <div className="md:col-span-2 flex flex-col gap-8">
+            <CommissionsChart />
             <MyNetworkCard />
         </div>
       </main>
