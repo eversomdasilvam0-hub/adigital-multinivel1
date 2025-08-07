@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Building2 } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import MobileNav from "./MobileNav";
+import MobileNav from "@/components/MobileNav";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
