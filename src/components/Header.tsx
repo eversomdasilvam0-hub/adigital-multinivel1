@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { Building2 } from "lucide-react";
 
 const Header = () => {
   const { user, signOut, loading } = useAuth();
@@ -9,7 +10,7 @@ const Header = () => {
     <header className="bg-background border-b">
       <div className="container mx-auto flex items-center justify-between p-4">
         <Link to="/" className="flex items-center gap-3 text-xl font-bold">
-          <img src="/logo.png" alt="Imobiliária Adigital Logo" className="h-8 w-auto" />
+          <Building2 className="h-8 w-auto" />
           <span>Imobiliária Adigital</span>
         </Link>
         <nav>
