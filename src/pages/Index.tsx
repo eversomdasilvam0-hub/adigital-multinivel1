@@ -47,7 +47,7 @@ const Index = () => {
         </h1>
         <p className="text-muted-foreground">
           Gerencie sua rede e acompanhe seus resultados.
-        p>
+        </p>
       </header>
       <main className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-1 flex flex-col gap-8">
